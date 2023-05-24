@@ -1,6 +1,8 @@
-import { Form, Input, Layout, Row, Col, Button, FormInstance } from 'antd';
+import { Form, Input, Row, Col, Button, FormInstance } from 'antd';
 import { useMatch, useNavigate, useLocation } from '@umijs/max';
 import React, { useCallback } from 'react';
+import api from '@/services/meta';
+import { message } from 'antd';
 
 interface IAuthManagerProps {
   onMainBtnClick: (values: any) => void;
@@ -22,19 +24,14 @@ const LoginBlock: React.FC<IAuthManagerProps> = ({
   if (!match) return null;
 
   return (
-    <Form form={form} labelCol={{ span: 4 }} wrapperCol={{ span: 14 }}>
-      <Form.Item label="用户名" name={'username'}>
-        <Input />
+    <Form form={form} labelCol={{ span: 4 }}>
+      <Form.Item name={'username'}>
+        <Input placeholder="请输入账号" />
       </Form.Item>
-      <Form.Item label="密码" name={'password'}>
-        <Input />
+      <Form.Item name={'password'}>
+        <Input placeholder="请输入密码" />
       </Form.Item>
-      <Form.Item
-        wrapperCol={{
-          offset: 4,
-          span: 14,
-        }}
-      >
+      <Form.Item>
         <Row justify={'space-around'}>
           <Col>
             <Button onClick={onMainBtnClick} type="primary">
@@ -57,19 +54,14 @@ const RegisterBlock: React.FC<IAuthManagerProps> = ({
   const match = useMatch('/register');
   if (!match) return null;
   return (
-    <Form form={form} labelCol={{ span: 4 }} wrapperCol={{ span: 14 }}>
-      <Form.Item label="用户名" name={'username'}>
-        <Input />
+    <Form form={form} labelCol={{ span: 4 }}>
+      <Form.Item name={'username'}>
+        <Input placeholder="请输入账号" />
       </Form.Item>
-      <Form.Item label="密码" name={'password'}>
-        <Input />
+      <Form.Item name={'password'}>
+        <Input placeholder="请输入密码" />
       </Form.Item>
-      <Form.Item
-        wrapperCol={{
-          offset: 4,
-          span: 14,
-        }}
-      >
+      <Form.Item>
         <Row justify={'space-around'}>
           <Col>
             <Button onClick={onMainBtnClick} type="primary">
@@ -96,42 +88,81 @@ const AuthManager = () => {
       navigate('/login');
     }
   }, [location.pathname]);
-  const onMainBtnClick = useCallback(() => {
+  const onMainBtnClick = useCallback(async () => {
     if (location.pathname === '/login') {
-      form.validateFields().then((values) => {
-        console.log(values);
-      });
+      try {
+        await form.validateFields();
+        const values = await form.getFieldsValue();
+        const logInfo = await api.AuthController.login(values);
+
+        if (logInfo.state === 'success') {
+          message.success('登录成功');
+          // 写入token
+          localStorage.setItem('ranger_meta', logInfo.data.token);
+          window.location.href = '/dashboard';
+
+          return;
+        } else {
+          message.error(`登录失败 ${logInfo.data.msg}`);
+          return;
+        }
+      } catch (err) {
+        message.error('登录失败');
+      }
     } else {
-      form.validateFields().then((values) => {
-        console.log(values);
-      });
+      try {
+        await form.validateFields();
+        const values = await form.getFieldsValue();
+        const regInfo = await api.AuthController.register(values);
+        if (regInfo.state === 'success') {
+          message.success('注册成功');
+          navigate('/login');
+          return;
+        } else {
+          message.error(`注册失败 ${regInfo.data.msg}`);
+          return;
+        }
+      } catch (err) {
+        message.error('注册失败');
+      }
     }
   }, [location.pathname]);
 
   return (
-    <Layout
+    <div
       style={{
-        width: '600px',
-        padding: '30px',
+        width: '400px',
         margin: '0 auto',
-        marginTop: '30vh',
+        height: '100vh',
+        display: 'flex',
+        flexDirection: 'column',
+        justifyContent: 'center',
       }}
     >
-      <Row justify="center">
-        <Col span={18}>
-          <LoginBlock
-            form={form}
-            onMainBtnClick={onMainBtnClick}
-            onSubBtnClick={onSubBtnClick}
-          />
-          <RegisterBlock
-            form={form}
-            onMainBtnClick={onMainBtnClick}
-            onSubBtnClick={onSubBtnClick}
-          />
-        </Col>
-      </Row>
-    </Layout>
+      <div
+        style={{
+          background: '#eeeeee',
+          height: '260px',
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'center',
+          padding: '40px',
+          paddingBottom: '0',
+          boxSizing: 'border-box',
+        }}
+      >
+        <LoginBlock
+          form={form}
+          onMainBtnClick={onMainBtnClick}
+          onSubBtnClick={onSubBtnClick}
+        />
+        <RegisterBlock
+          form={form}
+          onMainBtnClick={onMainBtnClick}
+          onSubBtnClick={onSubBtnClick}
+        />
+      </div>
+    </div>
   );
 };
 

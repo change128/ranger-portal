@@ -1,5 +1,5 @@
-const DashBoard = () => {
-  return <div>DashBoard</div>;
+const Dashboard: React.FC = () => {
+  return <></>;
 };
 
-export default DashBoard;
+export default Dashboard;

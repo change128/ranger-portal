@@ -11,8 +11,8 @@ export default defineConfig({
   routes: routes,
   npmClient: 'pnpm',
   proxy: {
-    '/api/user': {
-      target: 'http://localhost:7001',
+    '/api': {
+      target: 'http://127.0.0.1:7001',
     },
   },
 });

@@ -8,6 +8,7 @@ specifiers:
   '@umijs/max': ^4.0.56
   antd: ^5.0.0
   husky: ^8.0.1
+  json-diff-kit: 1.0.9-alpha.3
   lint-staged: ^13.0.3
   prettier: ^2.7.1
   prettier-plugin-organize-imports: ^2
@@ -19,6 +20,7 @@ dependencies:
   '@ant-design/pro-components': 2.3.59_antd@5.3.0
   '@umijs/max': 4.0.56_vftga3igpjiwrcdvxb4li5isbm
   antd: 5.3.0
+  json-diff-kit: 1.0.9-alpha.3
 
 devDependencies:
   '@types/react': 18.0.28
@@ -3396,6 +3398,10 @@ packages:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: false
 
+  /@types/lodash/4.14.191:
+    resolution: {integrity: sha512-BdZ5BCCvho3EIXw6wUCXHe7rS53AIDPLE+JzwgT+OsJk53oBfbSmZZ7CX4VaRoN78N+TJpFi9QPlfIVNmJYWxQ==}
+    dev: false
+
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
     dev: false
@@ -5968,6 +5974,10 @@ packages:
     resolution: {integrity: sha512-DCXu6Ifhqcks7TZKY3Hxp3y6qphY5SJZmrWMDrKcERSOXWQdMhU9Ig/PYrzyw/ul9jOIyh0N4M0tbC5hodg8dw==}
     dev: false
 
+  /fast-myers-diff/3.0.1:
+    resolution: {integrity: sha512-e8p26utONwDXeSDkDqu4jaR3l3r6ZgQO2GWB178ePZxCfFoRPNTJVZylUEHHG6uZeRikL1zCc2sl4sIAs9c0UQ==}
+    dev: false
+
   /fast-redact/3.1.2:
     resolution: {integrity: sha512-+0em+Iya9fKGfEQGcd62Yv6onjBmmhV1uh86XVfOU8VwAe6kaFdQCWI9s0/Nnugx5Vd9tdbZ7e6gE2tR9dzXdw==}
     engines: {node: '>=6'}
@@ -7045,6 +7055,17 @@ packages:
     resolution: {integrity: sha512-OYu7XEzjkCQ3C5Ps3QIZsQfNpqoJyZZA99wd9aWd05NCtC5pWOkShK2mkL6HXQR6/Cy2lbNdPlZBpuQHXE63gA==}
     engines: {node: '>=4'}
     hasBin: true
+    dev: false
+
+  /json-diff-kit/1.0.9-alpha.3:
+    resolution: {integrity: sha512-Oo7lZBYGMol9c2us6klAxfguKVCfyjxCAOtVnDuO0LU4MC5aQn49PTGLd2ElqTW2mk61eaenxCyeG+OTshUlQA==}
+    peerDependencies:
+      react: ^18.2.0 || ^17.0.0 || ^16.0.0
+      react-dom: ^18.2.0 || ^17.0.0 || ^16.0.0
+    dependencies:
+      '@types/lodash': 4.14.191
+      fast-myers-diff: 3.0.1
+      lodash: 4.17.21
     dev: false
 
   /json-parse-even-better-errors/2.3.1:
