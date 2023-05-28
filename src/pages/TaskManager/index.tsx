@@ -1,4 +1,5 @@
-import { Form, Input, Button, Modal, Table, Row, Col } from 'antd';
+import { CommonInput } from '@/components/Common';
+import { Form, Input, Button, Modal, Table, Row, Col, Card } from 'antd';
 import { useState } from 'react';
 
 const FormItem = Form.Item;
@@ -131,22 +132,118 @@ const TaskManager = () => {
     });
   };
 
-  const renderContent = () => {
-    switch (contentType) {
+  const RenderContent: React.FC<{ value?: any }> = ({ value }) => {
+    const { type } = value;
+    console.log('type', value);
+
+    switch (type) {
       case ContentType.text:
         return (
           <>
             <FormItem
               label="表单类型"
-              name={[contentType, 'formType']}
-              initialValue={contentType}
+              name={type}
+              initialValue={ContentType.text}
             >
               <Input disabled />
             </FormItem>
-            <FormItem label="字段名称" name={[contentType, 'fieldName']}>
+            {/* <FormItem label="字段名称" name={'name'}>
               <Input />
             </FormItem>
-            <FormItem label="提示" name={[contentType, 'tips']}>
+            <FormItem label="提示" name={'tips'}>
+              <Input />
+            </FormItem> */}
+          </>
+        );
+      case ContentType.image:
+        return (
+          <>
+            <FormItem
+              label="表单类型"
+              name={type}
+              initialValue={ContentType.image}
+            >
+              <Input disabled />
+            </FormItem>
+            {/* <FormItem label="字段名称" name={'name'}>
+              <Input />
+            </FormItem>
+            <FormItem label="提示" name={'tips'}>
+              <Input />
+            </FormItem>
+            <FormItem label="图片地址" name={'url'}>
+              <Input />
+            </FormItem> */}
+          </>
+        );
+      case ContentType.number:
+        return (
+          <>
+            <FormItem
+              label="表单类型"
+              name={type}
+              initialValue={ContentType.number}
+            >
+              <Input disabled />
+            </FormItem>
+            {/* <FormItem label="字段名称" name={'name'}>
+              <Input />
+            </FormItem>
+            <FormItem label="提示" name={'tips'}>
+              <Input />
+            </FormItem>
+            <FormItem label="数字内容" name={'content'}>
+              <Input />
+            </FormItem> */}
+          </>
+        );
+      default:
+        return null;
+    }
+  };
+
+  const renderContent = (type, index) => {
+    switch (type) {
+      case ContentType.text:
+        return (
+          <>
+            <FormItem
+              label="表单类型"
+              name={[index, 'type']}
+              labelCol={{
+                span: 6,
+              }}
+              wrapperCol={{
+                span: 12,
+              }}
+              labelAlign="right"
+            >
+              <Input disabled />
+            </FormItem>
+            <FormItem
+              wrapperCol={{
+                span: 12,
+              }}
+              label="字段名称"
+              name={[index, 'name']}
+              labelCol={{
+                span: 6,
+              }}
+              labelAlign="right"
+            >
+              <Input />
+            </FormItem>
+            <FormItem
+              wrapperCol={{
+                span: 12,
+              }}
+              label="提示"
+              name={[index, 'tips']}
+              labelCol={{
+                span: 6,
+              }}
+              labelAlign="right"
+            >
               <Input />
             </FormItem>
           </>
@@ -156,18 +253,51 @@ const TaskManager = () => {
           <>
             <FormItem
               label="表单类型"
-              name={[contentType, 'formType']}
-              initialValue={contentType}
+              name={[index, 'type']}
+              wrapperCol={{
+                span: 12,
+              }}
+              labelCol={{
+                span: 6,
+              }}
+              labelAlign="right"
             >
               <Input disabled />
             </FormItem>
-            <FormItem label="字段名称" name={[contentType, 'fieldName']}>
+            <FormItem
+              wrapperCol={{
+                span: 12,
+              }}
+              label="字段名称"
+              name={[index, 'name']}
+              labelCol={{
+                span: 6,
+              }}
+            >
               <Input />
             </FormItem>
-            <FormItem label="提示" name={[contentType, 'tips']}>
+            <FormItem
+              wrapperCol={{
+                span: 12,
+              }}
+              label="提示"
+              name={[index, 'tips']}
+              labelCol={{
+                span: 6,
+              }}
+            >
               <Input />
             </FormItem>
-            <FormItem label="图片地址" name={[contentType, 'url']}>
+            <FormItem
+              wrapperCol={{
+                span: 12,
+              }}
+              label="图片地址"
+              name={[index, 'url']}
+              labelCol={{
+                span: 6,
+              }}
+            >
               <Input />
             </FormItem>
           </>
@@ -177,18 +307,50 @@ const TaskManager = () => {
           <>
             <FormItem
               label="表单类型"
-              name={[contentType, 'formType']}
-              initialValue={contentType}
+              name={[index, 'type']}
+              labelCol={{
+                span: 6,
+              }}
+              wrapperCol={{
+                span: 12,
+              }}
             >
               <Input disabled />
             </FormItem>
-            <FormItem label="字段名称" name={[contentType, 'fieldName']}>
+            <FormItem
+              label="字段名称"
+              name={[index, 'name']}
+              labelCol={{
+                span: 6,
+              }}
+              wrapperCol={{
+                span: 12,
+              }}
+            >
               <Input />
             </FormItem>
-            <FormItem label="提示" name={[contentType, 'tips']}>
+            <FormItem
+              label="提示"
+              name={[index, 'tips']}
+              labelCol={{
+                span: 6,
+              }}
+              wrapperCol={{
+                span: 12,
+              }}
+            >
               <Input />
             </FormItem>
-            <FormItem label="数字内容" name={[contentType, 'content']}>
+            <FormItem
+              label="数字内容"
+              name={[index, 'content']}
+              labelCol={{
+                span: 6,
+              }}
+              wrapperCol={{
+                span: 12,
+              }}
+            >
               <Input />
             </FormItem>
           </>
@@ -196,6 +358,51 @@ const TaskManager = () => {
       default:
         return null;
     }
+  };
+
+  const ConfigForm: React.FC<{
+    value?: any;
+    index?: number;
+  }> = ({ value, index }) => {
+    const { type } = value;
+    return (
+      <Row
+        align="middle"
+        justify={'end'}
+        style={{
+          border: '1px solid #ccc',
+        }}
+      >
+        <Col span={4}>
+          <div
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            {index}
+          </div>
+        </Col>
+        <Col
+          style={{
+            padding: '10px 10px',
+            borderLeft: '1px solid #ccc',
+            borderRight: '1px solid #ccc',
+          }}
+          span={16}
+        >
+          {renderContent(type, index)}
+        </Col>
+        <Col span={4}>
+          <div
+            style={{
+              textAlign: 'center',
+            }}
+          >
+            <Button type="link">删除</Button>
+          </div>
+        </Col>
+      </Row>
+    );
   };
   return (
     <Form
@@ -207,6 +414,10 @@ const TaskManager = () => {
       wrapperCol={{
         span: 12,
       }}
+      style={{
+        height: '100vh',
+        overflow: 'scroll',
+      }}
     >
       <FormItem label="配置名称" name={'configName'}>
         <Input />
@@ -214,44 +425,75 @@ const TaskManager = () => {
       <FormItem label="配置类型" name={'configType'}>
         <Input />
       </FormItem>
-      <Row justify="space-between" align="middle">
-        <Col span={12} offset={6}>
-          <Button
-            onClick={() => {
-              handleCreate('text');
-            }}
-          >
-            新建文本
-          </Button>
-          <Button
-            onClick={() => {
-              handleCreate('image');
-            }}
-          >
-            新建图片
-          </Button>
-          <Button
-            onClick={() => {
-              handleCreate('number');
-            }}
-          >
-            新建数字
-          </Button>
-        </Col>
-      </Row>
 
-      <FormItem label="表单类型" name={'configList'} initialValue={[]}>
+      {/* <FormItem label="表单类型" name={'configList'} initialValue={[]}>
         <EditTable onEdit={handleEdit} onDelete={handleDelete} />
-      </FormItem>
+      </FormItem> */}
 
-      <Modal
+      <Form.List name={'configList'}>
+        {(fields, { add }) => {
+          console.log(form.getFieldValue('configList'));
+          return (
+            <Form.Item label="配置列表">
+              {fields.map((field, index) => {
+                return (
+                  <Form.Item name={index} key={index}>
+                    <ConfigForm index={index} />
+                  </Form.Item>
+                );
+              })}
+              <Button
+                onClick={() => {
+                  //q: 添加时如何设置默认值
+                  add(
+                    {
+                      type: 'text',
+                    },
+                    0,
+                  );
+                }}
+              >
+                <span>添加文案</span>
+              </Button>
+              <Button
+                onClick={() => {
+                  //q: 添加时如何设置默认值
+                  add(
+                    {
+                      type: 'image',
+                    },
+                    0,
+                  );
+                }}
+              >
+                <span>添加图片</span>
+              </Button>
+              <Button
+                onClick={() => {
+                  //q: 添加时如何设置默认值
+                  add(
+                    {
+                      type: 'number',
+                    },
+                    0,
+                  );
+                }}
+              >
+                <span>添加数字</span>
+              </Button>
+            </Form.Item>
+          );
+        }}
+      </Form.List>
+
+      {/* <Modal
         onCancel={onModalCancel}
         onOk={onModalOk}
         open={visable}
         {...modalProps[contentType]}
       >
         {renderContent()}
-      </Modal>
+      </Modal> */}
       <div></div>
       <Button type="primary" htmlType="submit">
         提交

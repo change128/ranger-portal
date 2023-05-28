@@ -2,7 +2,7 @@
 
 import { RequestConfig } from '@umijs/max';
 
-// import api from '@/services/meta';
+import api from '@/services/meta';
 
 import { redirect2login } from '@/utils';
 
