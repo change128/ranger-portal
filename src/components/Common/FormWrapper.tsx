@@ -14,14 +14,22 @@ const FormItem = Form.Item;
 interface FormWrapperProps extends FormProps {
   title?: string;
   showButton?: boolean;
-  onSubmitCB?: (value: any) => void;
   form?: FormInstance;
+  // 格式化表单数据
+  formatData?: (values?: any) => any;
 }
 
 export const FormWrapper: React.FC<PropsWithChildren<FormWrapperProps>> = (
   props,
 ) => {
-  const { children, title = '', form, showButton = true, ...rest } = props;
+  const {
+    children,
+    title = '',
+    form,
+    showButton = true,
+    formatData = () => {},
+    ...rest
+  } = props;
   const resetFormData = () => {
     Modal.confirm({
       title: '确定要重置表单吗？',
@@ -31,7 +39,7 @@ export const FormWrapper: React.FC<PropsWithChildren<FormWrapperProps>> = (
     });
   };
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    return formatData(values);
   };
 
   return (
@@ -40,7 +48,7 @@ export const FormWrapper: React.FC<PropsWithChildren<FormWrapperProps>> = (
       <Form {...rest} form={form} onFinish={onFinish}>
         {children}
         {showButton && (
-          <FormItem>
+          <FormItem label=" " colon={false}>
             <Space>
               <Button htmlType="submit">提交</Button>
               <Button onClick={resetFormData}>重置</Button>

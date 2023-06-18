@@ -1,5 +1,5 @@
 const Dashboard: React.FC = () => {
-  return <></>;
+  return <>首页</>;
 };
 
 export default Dashboard;

@@ -1,4 +1,3 @@
-import { CommonInput } from '@/components/Common';
 import { Form, Input, Button, Modal, Table, Row, Col, Card } from 'antd';
 import { useState } from 'react';
 

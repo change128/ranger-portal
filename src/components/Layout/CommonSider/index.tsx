@@ -2,11 +2,13 @@ import React from 'react';
 import { Layout, Menu } from 'antd';
 import { useLocation, useNavigate } from '@umijs/max';
 
-type IMenuItem = {
-  label: string;
-  key: string;
-  path: string;
-};
+type IMenuItem =
+  | {
+      label: string;
+      key: string;
+      path: string;
+    }
+  | false;
 
 export const CommonSider: React.FC<{ menuList: IMenuItem[] }> = ({
   menuList = [],
@@ -18,7 +20,13 @@ export const CommonSider: React.FC<{ menuList: IMenuItem[] }> = ({
   return (
     <Layout.Sider theme="light">
       <Menu
-        items={menuList}
+        items={
+          menuList as {
+            label: string;
+            key: string;
+            path: string;
+          }[]
+        }
         selectedKeys={[activeRoute || '']}
         onClick={(e) => {
           const target = menuList.find((m) => m.key === e.key)?.path || '';
