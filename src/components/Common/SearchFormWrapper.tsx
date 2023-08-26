@@ -1,7 +1,5 @@
 import React, { PropsWithChildren, ReactElement, useEffect } from 'react';
 import { Form, Button, Row, Col, Card, Space } from 'antd';
-import qs from 'query-string';
-import _ from 'lodash';
 
 export const SearchFormWrapper: React.FC<PropsWithChildren> = ({
   children,

@@ -10,6 +10,12 @@ import {
   CommonSingleCheckbox,
   TimeRangePicker,
 } from '@/components/Common/CommonForm';
+import styles from './index.less';
+import List from './List';
+import { Input, Space, Select } from 'antd';
+
+import { Button, Form, Radio } from 'antd';
+import { renderClient } from '/Users/wenqiangfeng/Desktop/前端/ranger-portal/node_modules/.pnpm/@umijs+renderer-react@4.0.56_ef5jwxihqo6n7gxfmzogljlgcm/node_modules/@umijs/renderer-react';
 
 export default () => {
   const formLayout = {
@@ -64,6 +70,62 @@ export default () => {
         name={'flag'}
       />
       <TimeRangePicker label="时间" showTime name={'timer'} />
+      <div className={styles.test}>
+        <Form.Item
+          label="测试"
+          wrapperCol={{
+            span: 24,
+          }}
+        >
+          <Radio.Group defaultValue="a">
+            <Radio.Button value="a">Hangzhou</Radio.Button>
+            <Radio.Button value="b">Shanghai</Radio.Button>
+            <Radio.Button value="c">Beijing</Radio.Button>
+          </Radio.Group>
+        </Form.Item>
+
+        <Form.Item>
+          {() => {
+            return <></>;
+          }}
+        </Form.Item>
+
+        {/* <Form.List name="configs">
+          {(fields, { add, remove }) => (
+            <>
+              {fields.map((field, index) => (
+                <>
+                  <Form.Item>
+                    <Space>
+                      <Select />
+                      <Select />
+                    </Space>
+                  </Form.Item>
+                </>
+              ))}
+              <Form.Item>
+                <Button
+                  type="dashed"
+                  onClick={() => {
+                    add();
+                  }}
+                >
+                  <span>添加</span>
+                </Button>
+                <Button
+                  type="dashed"
+                  onClick={(i) => {
+                    remove(i);
+                  }}
+                >
+                  <span>删除</span>
+                </Button>
+              </Form.Item>
+            </>
+          )}
+        </Form.List> */}
+      </div>
+      {/* <List /> */}
     </FormWrapper>
   );
 };

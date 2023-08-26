@@ -2,6 +2,7 @@ import { SearchFormWrapper } from '@/components/Common/SearchFormWrapper';
 import { CommonInput } from '@/components/Common/CommonForm';
 import { CommonMultipleSelect } from '@/components/Common/CommonForm';
 import { CommonSingleSelect } from '@/components/Common/CommonForm';
+import { Form } from 'antd';
 const SearchForm = () => {
   return (
     <SearchFormWrapper>
@@ -25,7 +26,7 @@ const SearchForm = () => {
 };
 
 const Dashboard: React.FC = () => {
-  return <SearchForm />;
+  return <Form></Form>;
 };
 
 export default Dashboard;

@@ -13,6 +13,7 @@ specifiers:
   prettier: ^2.7.1
   prettier-plugin-organize-imports: ^2
   prettier-plugin-packagejson: ^2
+  qs: ^6.11.2
   typescript: ^4.1.2
 
 dependencies:
@@ -21,6 +22,7 @@ dependencies:
   '@umijs/max': 4.0.56_vftga3igpjiwrcdvxb4li5isbm
   antd: 5.3.0
   json-diff-kit: 1.0.9-alpha.3
+  qs: 6.11.2
 
 devDependencies:
   '@types/react': 18.0.28
@@ -8868,6 +8870,13 @@ packages:
     resolution: {integrity: sha512-oyF+Urr3oAMUG/OiOuONL3HXM+53wvuH3mtIWQrYmsXoAq0DkvZp2RYUWFSMFtbdOpuS++9v+WAkzNVkMlNW6Q==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dev: false
+
+  /qs/6.11.2:
+    resolution: {integrity: sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==}
+    engines: {node: '>=0.6'}
+    dependencies:
+      side-channel: 1.0.4
     dev: false
 
   /query-string/6.14.1:
